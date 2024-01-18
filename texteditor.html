@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>page</title>
+    <style type="text/css">
+        *
+        {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .mdiv
+        {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+        }
+        .text
+        {
+            height: 20vh;
+            width: 100%;
+        }
+        .text h1
+        {
+            margin-top: 35px;
+            text-transform: uppercase;
+            font-size: 80px;
+            background: linear-gradient(157deg,skyblue,yellow,cyan,hotpink,skyblue,pink,white);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+
+        }
+        textarea[placeholder]
+        {
+            background-color: mintcream;
+            margin-top: 30px;
+            height: 150px;
+            width: 700px;
+            border-bottom-color: 15px solid red;
+            border-radius: 40px;
+            padding: 40px;
+            padding-left: 130px;
+            font-size: 30px;
+            border-bottom: 15px solid yellow;
+            border-top: 15px solid pink;
+            border-left: 15px solid skyblue;
+            border-right: 15px solid navy;
+       }
+       button
+       {
+        text-transform: uppercase;
+        font-size: 16px;
+        height: 60px;
+        width: 120px;
+        align-items: space-between;
+        display: inline-block;
+        margin-top:25px;
+        border-radius: 20px;
+        background-color: transparent;
+        margin-left: 20px;
+        margin-right: 20px;
+        
+       }
+       fieldset
+       {
+        margin-top: 50px;
+        height: 44vh;
+        width: 45%;
+        background: linear-gradient(to left,cyan,darkcyan);
+        border-radius: 20px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        animation: relative move 2s  infinite;
+        position: sticky;
+       }
+       select
+       {
+        height: 50px;
+        width: 250px;
+        background: transparent;
+        border: 5px solid black;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 30px;
+        border-color: seagreen;
+         font-size: 16px;
+         border-radius: 10px;
+       }
+       h3
+       {
+        margin-top: 55px;
+        text-transform: uppercase;
+        font-size: 30px;
+        letter-spacing: 10px;
+       }
+       button:hover
+       {
+        background-color: yellow;
+        border: 5px solid black;
+        height: 65px;
+        width: 125px;
+       }
+      
+    </style>
+</head>
+<body>
+    <div class="mdiv">
+        <div class="text">
+            <h1 align="center">text-editor-by-sahil</h1>
+            <div>
+               <center> <form>
+                    <textarea rows="6" cols="60" placeholder="ENTER YOUR TEXT TO EDIT" id="txt" onkeypress="updateInfo()" autofocus></textarea>
+                    
+                    <h3 style=" width: 60%; height: 30px; color: white;"id="info">your text has 0 word and 0 char</h3>
+                    <fieldset>
+                    <button type="button" onclick="upperCase()">uppercase</button>
+                    <button type="button" onclick="lowerCase()">lowercase</button>
+                    <button type="button" onclick="bold()">bold</button>
+                    <button type="button" onclick="search()">search</button><br>
+                    <button type="button" onclick="alignRight()">right</button>
+                    <button type="button" onclick="alignleft()">left</button>
+                    <button type="button" onclick="cutText()">Cut</button>
+                    <button type="button" onclick="alignleft()">left</button>
+                    <span style="width:150px"> <button type="button" onclick="undo()">Undo</button>
+                     <button type="button" onclick="copyText()">Copy</button>
+                    <button type="button" onclick="pasteText()">Paste</button></span>
+                     <br><br><br>
+                    <select name="" id="colorToChoose" onchange="color()">
+                        <option value="" disabled selected>TEXT COLOR</option>
+                        <option value="red">Red</option>
+                        <option value="green">GREEN</option>
+                        <option value="blue">BLUE</option>
+                        <option value="pink">PINK</option>
+                        <option value="yellow">YELLOW</option>
+                        <option value="black">BLACK</option>
+                    </select>
+                    <select name="" id="fontFamilySelect" onchange="fontFamily()">
+                        <option value="" disabled selected>FONT FAMILY</option>
+                        <option value="cursive">CURSIVE</option>
+                        <option value="sans-serif">SANS SERIF</option>
+                        <option value="Times New Roman">TIMES NEW ROMAN</option>
+                        <option value="fantasy">FANTASY</option>
+                        <option value="monospace">MONOSPACE</option>
+                </fieldset>
+                </form></center>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        let txt=document.getElementById("txt");
+        let info=document.getElementById("info");
+        let colorChange = document.getElementById("colorToChoose") ;
+        let fontFamilySelect = document.getElementById("fontFamilySelect");
+         let changesCounter = 0;
+        function upperCase()
+        {
+            txt.value=txt.value.toUpperCase()
+        }
+         function lowerCase()
+        {
+            txt.value=txt.value.toLowerCase()
+        }
+          function bold()
+        {
+            txt.style=fontWeight="bolder";
+        }
+         function alignRight()
+        {
+            txt.style.textAlign="right";
+        }
+        function alignleft()
+        {
+            txt.style.textAlign="left";
+        }
+        function updateInfo()
+        {
+            let text=txt.value;
+            info.innerHTML=`your text has${text.split(' ').length}word and${text.length}chars`
+        }
+
+        function search() {
+            let str = prompt('Enter something to search');
+            let text = txt.value;
+            if (text.includes(str)) {
+                alert(`yes${str} is present`);
+            } else {
+                alert(`${str} is not present`);
+            }
+        }
+         function color()
+        {
+            let colorSelect = colorChange.value ;
+            txt.style.color = colorSelect ;
+            updateInfo() ;
+        }
+         function fontFamily() {
+            let fontSelect = fontFamilySelect.value;
+            txt.style.fontFamily = fontSelect;
+            updateInfo();
+        }
+         function font()
+        {
+            let fontChange = fontSizeChange.value ;
+            txt.style.fontSize = fontChange ;
+            updateInfo() ;
+        }
+          function undo() {
+            if (changesCounter > 0) {
+                txt.value = txt.value.split('\n').slice(0, -1).join('\n');
+                changesCounter--;
+                updateInfo();
+            }
+        }
+         function cutText() {
+            document.execCommand("cut");
+            updateInfo();
+        }
+         function pasteText() {
+            navigator.clipboard.readText()
+                .then((text) => {
+                    document.execCommand("insertText", false, text);
+                    updateInfo();
+                })
+                .catch((err) => {
+                    console.error('Unable to paste: ', err);
+                });
+        }
+        function copyText() {
+            document.execCommand("copy");
+            updateInfo();
+        }
+
+
+
+
+
+        
+
+    </script>
+
+</body>
+</html>
